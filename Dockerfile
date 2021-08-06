@@ -6,8 +6,8 @@ RUN apt install -y nodejs npm
 COPY . /app
 COPY config.json /app/config.json
 
-RUN npm install
-
 WORKDIR /app
+
+RUN npm install
 
 ENTRYPOINT [ "node", "." ]
