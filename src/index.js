@@ -77,7 +77,7 @@ function init_express(port) {
 	});
 
 	app.get("/user/chat/get", (req, res) => {
-		res.send(JSON.stringify(chat_queue.shift()));
+		res.send(JSON.stringify(chat_queue.shift()) ? JSON.stringify(chat_queue.shift()) : "null");
 	});
 
 	app.get("/user/chat/send", (req, res) => {
@@ -151,6 +151,10 @@ function init_express(port) {
 				});
 			}
 		}
+	});
+
+	app.get("/function/equipped", (req, res) => {
+		res.send(JSON.stringify(bot.heldItem));
 	});
 
 	app.get("/function/lookat", (req, res) => {
