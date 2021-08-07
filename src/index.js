@@ -163,6 +163,19 @@ function init_express(port) {
 		res.send("OK");
 	});
 
+	app.get("/function/find_block", (req, res) => {
+		var block = bot.findBlock({
+			matching: req.query.matching,
+			distance: 64
+		});
+		res.send(JSON.stringify(block));
+	});
+
+	app.get("/function/nearest_entity", (req, res) => {
+		var entity = bot.nearestEntity();
+		res.send(JSON.stringify(entity));
+	});
+
 	app.listen(port, () => {
 		console.log(`Listening on port ${port}`);
 	});
