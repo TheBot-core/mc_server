@@ -165,7 +165,7 @@ function init_express(port) {
 
 	app.get("/function/find_block", (req, res) => {
 		const mc_data = require("minecraft-data")(bot.version);
-		if (mc_data.itemsByName[req.query.matching] == undefined) {
+		if (mc_data.blocksByName[req.query.matching] == undefined) {
 			res.send(500, "NO");
 		} else {
 			const block_id = mc_data.blocksByName[req.query.matching].id;
