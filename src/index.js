@@ -77,7 +77,8 @@ function init_express(port) {
 	});
 
 	app.get("/user/chat/get", (req, res) => {
-		res.send(JSON.stringify(chat_queue.shift()) ? JSON.stringify(chat_queue.shift()) : "null");
+		var chat_msg = chat_queue.shift();
+		res.send(JSON.stringify(chat_msg) ? JSON.stringify(chat_msg) : "null");
 	});
 
 	app.get("/user/chat/send", (req, res) => {
