@@ -164,11 +164,18 @@ function init_express(port) {
 	});
 
 	app.get("/function/find_block", (req, res) => {
-		var block = bot.findBlock({
-			matching: req.query.matching,
-			distance: 64
-		});
-		res.send(JSON.stringify(block));
+		const mc_data = require("minecraft-data")(bot.version);
+		if (mc_data.itemsByName[req.query.matching] == undefined) {
+			res.send(500, "NO");
+		} else {
+			const block_id = mc_data.blocksByName[req.query.matching].id;
+
+			var block = bot.findBlock({
+				matching: block_id,
+				distance: 64
+			});
+			res.send(JSON.stringify(block));	
+		}
 	});
 
 	app.get("/function/nearest_entity", (req, res) => {
